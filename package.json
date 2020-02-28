@@ -1,0 +1,53 @@
+{
+  "name": "fastify-rest-graphql-api",
+  "version": "1.0.0",
+  "description": "Fastify Typescript REST / GraphQL Postgres API Boilerplate",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "------DEV-----": "",
+    "dev": "nodemon",
+    "tslint": "tslint -c tslint.json -p tsconfig.json",
+    "build": "npm run format && npm run tslint && tsc",
+    "------Linting and Testing-----": "",
+    "format": "prettier --write \"{src,test}/**/*.ts\"",
+    "tslint-test": "tslint -c tslint.test.json -p tsconfig.test.json",
+    "test": "npm run format && npm run tslint-test && nyc mocha",
+    "------MIGRATION-------": "",
+    "migrate": "node ./scripts/migrate.js",
+    "rollback": "node ./scripts/rollback.js",
+    "seed": "node ./scripts/seed.js",
+    "resetdb": "node ./scripts/reset_db.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^8.2.0",
+    "fastify": "^2.0.0",
+    "knex": "^0.20.10",
+    "mailgun-js": "^0.22.0",
+    "pg": "^7.18.2"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
+    "@types/dotenv": "^8.2.0",
+    "@types/knex": "^0.16.1",
+    "@types/mailgun-js": "^0.22.4",
+    "@types/mocha": "^7.0.1",
+    "@types/node": "^13.7.6",
+    "@types/sinon": "^7.5.2",
+    "istanbul": "^0.4.5",
+    "mocha": "^7.1.0",
+    "nodemon": "^2.0.2",
+    "nyc": "^15.0.0",
+    "prettier": "^1.19.1",
+    "sinon": "^9.0.0",
+    "ts-node": "^8.6.2",
+    "tslint": "^6.0.0",
+    "typescript": "^3.8.2"
+  }
+}

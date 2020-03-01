@@ -1,0 +1,40 @@
+version: '3.7'
+
+services:
+  db:
+    image: postgres:11.2
+    container_name: db
+    volumes:
+      - ./sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - mydb_data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    restart: always
+
+  # local_api:
+  #   container_name: local_api
+  #   build:
+  #     dockerfile: ./Dockerfile
+  #     context: .
+  #   volumes:
+  #     - ./node_modules
+  #     - .:/app
+  #   environment:
+  #     - APP_DB_TYPE=postgres
+  #     - APP_DB_HOST=db
+  #     - APP_DB_PORT=5432
+  #     - APP_DB_DB=db
+  #     - APP_DB_USER=dev_user
+  #     - APP_DB_PASSWORD=123test
+  #     - JWT_SECRET=secret
+  #     - JWT_EXPIRES_IN=1d
+  #     - NODE_ENV=development
+  #     - APP_PORT=3000
+  #   ports:
+  #     - 3000:3000
+  #   restart: always
+  #   depends_on:
+  #     - db
+
+volumes:
+  mydb_data:

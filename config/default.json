@@ -1,0 +1,39 @@
+{
+    "app_host": "localhost",
+    "app_port": "3001",
+    "client_base_url": "http://localhost:3000",
+    "env": "development",
+    "errorStatus": {
+        "OperationError": 503,
+        "InternalError": 500,
+        "NotFoundError": 404,
+        "ForbiddenError": 403,
+        "UnauthorizedError": 401,
+        "InvalidError": 400
+    },
+    "infra": {
+        "knex": {
+            "client": "postgres",
+            "connection": {
+                "host": "localhost",
+                "port": 5432,
+                "database": "local_db",
+                "user": "dev_user",
+                "password": "123test"
+            }
+        },
+        "jwt": {
+            "secret": "jh489384fdh2332e8hfwjhs",
+            "expiresin": "3h"
+        },
+        "stripe": {
+            "secret": "",
+            "public": ""
+        },
+        "mailgun": {
+            "apiKey": "",
+            "publicApiKey": "",
+            "domain": ""
+        }
+    }
+}

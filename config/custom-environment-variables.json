@@ -1,0 +1,31 @@
+{
+    "app_host": "APP_HOST",
+    "app_port": "APP_PORT",
+    "client_base_url": "CLIENT_BASE_URL",
+    "env": "ENV",
+    "infra": {
+        "knex": {
+            "client": "APP_DB_TYPE",
+            "connection": {
+                "host": "APP_DB_HOST",
+                "port": "APP_DB_PORT",
+                "database": "APP_DB_DB",
+                "user": "APP_DB_USER",
+                "password": "APP_DB_PASSWORD"
+            }
+        },
+        "jwt": {
+            "secret": "JWT_SECRET",
+            "expiresin": "JWT_EXPIRES_IN"
+        },
+        "stripe": {
+            "secret": "STRIPE_SECRET",
+            "public": "STRIPE_PUBLIC"
+        },
+        "mailgun": {
+            "apiKey": "MAILGUN_API_KEY",
+            "publicApiKey": "MAILGUN_PUBLIC_KEY",
+            "domain": "MAILGUN_DOMAIN"
+        }
+    }
+}

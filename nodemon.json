@@ -1,0 +1,9 @@
+{
+    "ext": "ts",
+    "ignore": [
+        "*.spec.ts",
+        "sql/*",
+        "node_modules"
+    ],
+    "exec": "ts-node -r dotenv/config src/index.ts"
+}

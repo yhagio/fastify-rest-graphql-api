@@ -3,7 +3,7 @@ import { IEmailService } from './interface';
 import IConfig from '../../common/config';
 
 export default class EmailService implements IEmailService {
-  constructor(private readonly emailClient: Mailgun, private readonly config: IConfig) { }
+  constructor(private readonly emailClient: Mailgun, private readonly config: IConfig) {}
 
   async sendWelcome(recipientEmail: string, recipientName: string): Promise<void> {
     const data: messages.SendData = {

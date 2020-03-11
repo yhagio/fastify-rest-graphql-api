@@ -13,7 +13,7 @@ export default class ResetPasswordService implements IResetPasswordService {
     private readonly knex: Knex,
     private readonly userService: IUserService,
     private readonly validator: IResetPasswordValidator
-  ) { }
+  ) {}
 
   async create(resetPassword: IResetPassword): Promise<void> {
     await this.validator.create(resetPassword);

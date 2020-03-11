@@ -15,7 +15,7 @@ export default class AuthHandler {
     private readonly userService: IUserService,
     private readonly emailService: IEmailService,
     private readonly resetPassService: IResetPasswordService
-  ) { }
+  ) {}
 
   async signUp(req: FastifyRequest, res: FastifyReply<ServerResponse>): Promise<void> {
     const newUser = await this.userService.create(req.body);
@@ -38,7 +38,10 @@ export default class AuthHandler {
     res.code(200).send({ message: 'logged out' });
   }
 
-  async forgotPassword(req: FastifyRequest, res: FastifyReply<ServerResponse>): Promise<void> {
+  async forgotPassword(
+    req: FastifyRequest,
+    res: FastifyReply<ServerResponse>
+  ): Promise<void> {
     const { email }: { email: string } = req.body;
     const user = await this.userService.getByEmailWithPassword(email);
     if (!user) {
@@ -48,14 +51,15 @@ export default class AuthHandler {
     await this.resetPassService.create({ user_id: user.id, token });
     res.code(200).send({ message: 'Email is sent' });
     await this.emailService.sendResetPassword(user.email, token);
-
   }
 
-  async updatePassword(req: FastifyRequest, res: FastifyReply<ServerResponse>): Promise<void> {
+  async updatePassword(
+    req: FastifyRequest,
+    res: FastifyReply<ServerResponse>
+  ): Promise<void> {
     const { token, password }: { token: string; password: string } = req.body;
     await this.resetPassService.completeResetPassword(token, password);
     res.code(200).send({ message: 'Done' });
-
   }
 
   // preHandler
@@ -72,7 +76,11 @@ export default class AuthHandler {
   //   next();
   // }
 
-  async requiresLogIn(req: FastifyRequest, res: FastifyReply<ServerResponse>, next: (err?: Error | undefined) => void): Promise<void> {
+  async requiresLogIn(
+    req: FastifyRequest,
+    res: FastifyReply<ServerResponse>,
+    next: (err?: Error | undefined) => void
+  ): Promise<void> {
     if ((req as any).user_id) {
       next();
     } else {
@@ -80,7 +88,11 @@ export default class AuthHandler {
     }
   }
 
-  async requiresAdmin(req: FastifyRequest, res: FastifyReply<ServerResponse>, next: (err?: Error | undefined) => void): Promise<void> {
+  async requiresAdmin(
+    req: FastifyRequest,
+    res: FastifyReply<ServerResponse>,
+    next: (err?: Error | undefined) => void
+  ): Promise<void> {
     if ((req as any).user_id) {
       const { admin } = await this.userService.getOneById((req as any).user_id);
       if (admin === true) {

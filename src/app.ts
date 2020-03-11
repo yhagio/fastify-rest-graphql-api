@@ -1,7 +1,7 @@
 import Fastify, { FastifyInstance } from 'fastify';
 import helmet from 'fastify-helmet';
-import cors from 'fastify-cors'
-import config from 'config'
+import cors from 'fastify-cors';
+import config from 'config';
 import { Server, IncomingMessage, ServerResponse } from 'http';
 
 import UserHandler from './handler/user';
@@ -27,7 +27,7 @@ const app: FastifyInstance<Server, IncomingMessage, ServerResponse> = Fastify({
 const appConfig: IConfig = config;
 
 // Setup middlewares
-app.register(helmet)
+app.register(helmet);
 app.register(cors, {
   origin: appConfig.get<string>('client_base_url'),
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
@@ -46,9 +46,7 @@ const userService = new UserService(new UserValidator(new UserDataAccess(knexCon
 const resetPasswordService = new ResetPasswordService(
   knexConn,
   userService,
-  new ResetPasswordValidator(
-    new ResetPasswordDataAccess(knexConn)
-  )
+  new ResetPasswordValidator(new ResetPasswordDataAccess(knexConn))
 );
 
 const authHandler = new AuthHandler(
@@ -61,20 +59,28 @@ const userHandler = new UserHandler(userService);
 
 // Setup routes and assign handlers
 app.get('/health', (req, res) => {
-  res.send({ ok: true })
-})
+  res.send({ ok: true });
+});
 
-app.post('/api/auth/signup', {}, authHandler.signUp.bind(authHandler))
-app.post('/api/auth/login', {}, authHandler.login.bind(authHandler))
-app.post('/api/auth/logout', {}, authHandler.logout.bind(authHandler))
-app.post('/api/auth/forgot_password', {}, authHandler.forgotPassword.bind(authHandler))
-app.post('/api/auth/update_password', {}, authHandler.updatePassword.bind(authHandler))
+app.post('/api/auth/signup', {}, authHandler.signUp.bind(authHandler));
+app.post('/api/auth/login', {}, authHandler.login.bind(authHandler));
+app.post('/api/auth/logout', {}, authHandler.logout.bind(authHandler));
+app.post('/api/auth/forgot_password', {}, authHandler.forgotPassword.bind(authHandler));
+app.post('/api/auth/update_password', {}, authHandler.updatePassword.bind(authHandler));
 
 // On every request
-app.addHook('onRequest', async (req, res) => SetUserToRequest(req, res, authService))
+app.addHook('onRequest', async (req, res) => SetUserToRequest(req, res, authService));
 
-app.get('/api/account', { preValidation: [authHandler.requiresLogIn] }, userHandler.getOneById.bind(userHandler))
-app.put('/api/account', { preValidation: [authHandler.requiresLogIn] }, userHandler.update.bind(userHandler))
+app.get(
+  '/api/account',
+  { preValidation: [authHandler.requiresLogIn] },
+  userHandler.getOneById.bind(userHandler)
+);
+app.put(
+  '/api/account',
+  { preValidation: [authHandler.requiresLogIn] },
+  userHandler.update.bind(userHandler)
+);
 
 app.setErrorHandler(ErrorHandler);
 

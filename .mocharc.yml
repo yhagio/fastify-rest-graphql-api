@@ -1,0 +1,35 @@
+allow-uncaught: false
+async-only: false
+bail: false
+check-leaks: false
+color: true
+delay: false
+diff: true
+exit: false # could be expressed as "no-exit: true"
+extension:
+  - ts
+forbid-only: false
+forbid-pending: false
+full-trace: false
+
+# fgrep and grep are mutually exclusive
+# grep: something
+growl: false
+ignore:
+  - src/app.ts
+  - src/index.ts
+  - types
+  - scripts
+  - dist
+  - sql
+inline-diffs: false
+# needs to be used with grep or fgrep
+# invert: false
+opts: false
+recursive: false
+reporter: spec
+
+retries: 1
+spec: tests/**/*.spec.ts
+timeout: false # same as "no-timeout: true" or "timeout: 0"
+trace-warnings: true # node flags ok

@@ -11,7 +11,7 @@ import { IUser } from '../../domain/user';
 import { hashString } from '../../common/hash';
 
 export default class UserDataAccess implements IUserDataAccess {
-  constructor(private knex: Knex) { }
+  constructor(private knex: Knex) {}
 
   async create(user: IUserSignUp): Promise<IUserAccount> {
     user.password = await hashString(user.password);

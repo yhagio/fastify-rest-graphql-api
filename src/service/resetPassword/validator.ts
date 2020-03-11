@@ -6,7 +6,7 @@ import { IResetPassword } from '../../domain/resetPassword';
 import { IResetPasswordDataAccess } from '../../dataAccess/resetPassword/interface';
 
 export default class ResetPasswordValidator implements IResetPasswordValidator {
-  constructor(private readonly dataAccess: IResetPasswordDataAccess) { }
+  constructor(private readonly dataAccess: IResetPasswordDataAccess) {}
 
   async getOneByTokenTrx(trx: Knex.Transaction, token: string): Promise<IResetPassword> {
     if (!trx) {

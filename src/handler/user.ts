@@ -4,9 +4,12 @@ import { UnauthorizedError } from '../common/error/unauthorized';
 import { IUserService } from '../service/user/interface';
 
 export default class UserHandler {
-  constructor(private userService: IUserService) { }
+  constructor(private userService: IUserService) {}
 
-  async getOneById(req: FastifyRequest, res: FastifyReply<ServerResponse>): Promise<void> {
+  async getOneById(
+    req: FastifyRequest,
+    res: FastifyReply<ServerResponse>
+  ): Promise<void> {
     if (!(req as any).user_id) {
       throw new UnauthorizedError('You are not authorized');
     }

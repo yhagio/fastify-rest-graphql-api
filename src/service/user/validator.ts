@@ -12,7 +12,7 @@ import { IUser } from '../../domain/user';
 import { IUserDataAccess } from '../../dataAccess/user/interface';
 
 export default class UserValidator implements IUserService {
-  constructor(private dataAccess: IUserDataAccess) { }
+  constructor(private dataAccess: IUserDataAccess) {}
 
   create(user: IUserSignUp): Promise<IUserAccount> {
     if (!user || !Object.keys(user).length) {

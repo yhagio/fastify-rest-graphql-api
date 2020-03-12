@@ -10,6 +10,7 @@ export const SetUserToRequest = async (
   let authToken: string = req.headers?.authorization;
   if (authToken?.indexOf('Bearer') >= 0) {
     authToken = authToken.replace('Bearer ', '');
+    // TODO: What if verifyToken throws error?
     const { id } = await authService.verifyToken(authToken);
     (req as any).user_id = id;
   }

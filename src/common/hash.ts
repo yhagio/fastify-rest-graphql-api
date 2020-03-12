@@ -1,5 +1,5 @@
-import Bcrypto from 'bcryptjs';
+import bcrypt from 'bcryptjs';
 
 export const hashString = async (str: string): Promise<string> => {
-  return Bcrypto.hash(str, 10);
+  return bcrypt.hash(str, 10);
 };

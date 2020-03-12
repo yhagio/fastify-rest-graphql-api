@@ -5,11 +5,14 @@
 - [x] User Auth functionality (Signup, Login, Forgot Password, Reset Password)
 - [x] JWT Authentication
 - [x] REST API
-- [ ] GraphQL API
-- [ ] Knex with Postgres implementation and auto migration
+- [x] Dependency injection
 - [x] Configs via environmental variables
 - [x] Email notification (Welcome email, Reset password email)
 - [ ] Swagger REST API documentation
+- [ ] GraphQL API
 - [ ] GraphQL playground
-- [x] Unit tests
-- [x] Dependency injection
+- [x] Knex with Postgres implementation
+- [ ] auto migration (optional via env var)
+- [ ] Unit tests
+- [ ] Travis CI
+- [ ] Badges (coverage, opesn source, MIT, up-to-date dependencies)

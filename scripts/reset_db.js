@@ -7,8 +7,8 @@ async function resetDB() {
     ...config.get('knex')
   });
 
+  // Put tables to be deleted
   const users = knex('users').del();
-  const gigs = knex('gigs').del();
 
   await Promise.all([
     users,

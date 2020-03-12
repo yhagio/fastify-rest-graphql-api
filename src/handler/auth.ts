@@ -62,20 +62,6 @@ export default class AuthHandler {
     res.code(200).send({ message: 'Done' });
   }
 
-  // preHandler
-
-  // async setUserToRequest(
-  //   req: FastifyRequest, res: FastifyReply<ServerResponse>, next: (err?: Error | undefined) => void
-  // ): Promise<void> {
-  //   let authToken: string = req.headers.authorization || '';
-  //   if (authToken.indexOf('Bearer') >= 0) {
-  //     authToken = authToken.replace('Bearer ', '');
-  //   }
-  //   const { id } = await this.authService.verifyToken(authToken);
-  //   (req as any).user_id = id;
-  //   next();
-  // }
-
   async requiresLogIn(
     req: FastifyRequest,
     res: FastifyReply<ServerResponse>,

@@ -20,28 +20,30 @@ export default class DB {
     );
   }
 
+  /*
   // Runs all migrations that have not yet been run.
-  // async migrate(): Promise<void> {
-  //   const migrationKnex = this.getMigrations();
-  //   await migrationKnex.migrate.latest();
-  //   await migrationKnex.destroy();
-  // }
+  async migrate(): Promise<void> {
+    const migrationKnex = this.getMigrations();
+    await migrationKnex.migrate.latest();
+    await migrationKnex.destroy();
+  }
 
   // Rolls back the latest migration group.
-  // async rollback(): Promise<void> {
-  //   const migrationKnex = this.getMigrations();
-  //   await migrationKnex.migrate.rollback();
-  //   await migrationKnex.destroy();
-  // }
+  async rollback(): Promise<void> {
+    const migrationKnex = this.getMigrations();
+    await migrationKnex.migrate.rollback();
+    await migrationKnex.destroy();
+  }
 
-  // private getMigrations(): Knex {
-  //   const migrationConfig = {
-  //     ...this.config.get('knex'),
-  //     migrations: {
-  //       directory: path.normalize(`${__dirname}/migrations`),
-  //       tableName: 'knex_migrations'
-  //     }
-  //   };
-  //   return Knex(migrationConfig as any);
-  // }
+  private getMigrations(): Knex {
+    const migrationConfig = {
+      ...this.config.get<object>('knex'),
+      migrations: {
+        directory: path.normalize(`${__dirname}/migrations`),
+        tableName: 'knex_migrations'
+      }
+    };
+    return Knex(migrationConfig as any);
+  }
+  */
 }

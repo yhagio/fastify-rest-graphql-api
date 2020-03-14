@@ -22,7 +22,8 @@
   "reporter": [
     "lcov",
     "text",
-    "text-summary"
+    "text-summary",
+    "json"
   ],
   "all": true,
   "sourceMap": true,

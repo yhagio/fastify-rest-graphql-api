@@ -50,6 +50,9 @@ export default class ResetPasswordService implements IResetPasswordService {
       await trx.commit();
     } catch (err) {
       await trx.rollback();
+      if (err instanceof InvalidError) {
+        throw err;
+      }
       throw new OperationError(`Failed to complete resetting password; ${err.message}`);
     }
   }

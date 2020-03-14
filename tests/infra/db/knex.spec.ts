@@ -4,9 +4,7 @@ import sinon from 'sinon';
 describe('Service', () => {
   const sandbox = sinon.createSandbox();
 
-  beforeEach(() => {
-
-  });
+  beforeEach(() => {});
 
   afterEach(() => {
     sandbox.reset();

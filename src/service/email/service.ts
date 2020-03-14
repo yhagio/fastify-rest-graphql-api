@@ -7,25 +7,25 @@ export default class EmailService implements IEmailService {
 
   async sendWelcome(recipientEmail: string, recipientName: string): Promise<void> {
     const data: messages.SendData = {
-      from: 'MyGigs Admin <support@mygigs.com>',
+      from: 'MyApp Admin <support@myapp.com>',
       to: recipientEmail,
-      subject: 'Welcome to MyGigs',
+      subject: 'Welcome to MyApp',
       text: `
         Hi ${recipientName},
-        Big welcome from MyGigs Team!
+        Big welcome from MyApp Team!
 
-        We really hope you enjoy using MyGigs!
+        We really hope you enjoy using MyApp!
 
         Best,
-        MyGigs Team
+        MyApp Team
       `,
       html: `
         Hi ${recipientName}<br/>
         <br/>
-        Welcome to <a href="${this.getClientURL()}">MyGigs</a>! We really hope you enjoy using MyGigs!<br/>
+        Welcome to <a href="${this.getClientURL()}">MyApp</a>! We really hope you enjoy using MyApp!<br/>
         <br/>
         Best,<br/>
-        MyGigs Team
+        MyApp Team
       `
     };
     await this.emailClient.messages().send(data);
@@ -35,11 +35,11 @@ export default class EmailService implements IEmailService {
     const resetPassworlURL = `${this.getClientURL()}/reset_password?token=${token}`;
 
     const data: messages.SendData = {
-      from: 'MyGigs Admin <support@mygigs.com>',
+      from: 'MyApp Admin <support@myapp.com>',
       to: recipientEmail,
-      subject: 'MyGigs: Reset password instruction',
+      subject: 'MyApp: Reset password instruction',
       text: `
-        Hi there from MyGigs Team,
+        Hi there from MyApp Team,
 
         It appears that you have requested a password reset. If this was you, please follow the link below to update your password:
 
@@ -52,10 +52,10 @@ export default class EmailService implements IEmailService {
         If you didn't request a password reset you can safely ignore this email and your account will not be changed.
 
         Best,
-        MyGigs Team
+        MyApp Team
       `,
       html: `
-        Hi there from MyGigs Team<br/>
+        Hi there from MyApp Team<br/>
         <br/>
         It appears that you have requested a password reset. If this was you, please follow the link below to update your password:<br/>
         <br/>
@@ -68,7 +68,7 @@ export default class EmailService implements IEmailService {
         If you didn't request a password reset you can safely ignore this email and your account will not be changed.<br/>
         <br/>
         Best,<br/>
-        MyGigs Team<br/>
+        MyApp Team<br/>
       `
     };
     await this.emailClient.messages().send(data);

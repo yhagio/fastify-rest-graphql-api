@@ -15,8 +15,8 @@
 - [x] Email notification (Welcome email, Reset password email)
 - [x] Knex with Postgres implementation
 - [x] Unit tests
-- [ ] Travis CI
-- [ ] Badges (coverage, opesn source, MIT, up-to-date dependencies)
+- [x] Travis CI
+- [x] Badges (coverage, opesn source, MIT, up-to-date dependencies)
 - [x] MIT LICENSE
 - [ ] Swagger REST API documentation
 - [ ] GraphQL API

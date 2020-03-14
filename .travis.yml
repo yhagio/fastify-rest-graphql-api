@@ -3,4 +3,5 @@ node_js:
   - 12.16.0
 
 after_success:
-  - ./bin/codecov -e TRAVIS_NODE_VERSION -f coverage/*.json
+  - bash <(curl -s https://codecov.io/bash)
+  # - ./bin/codecov -e TRAVIS_NODE_VERSION -f coverage/*.json

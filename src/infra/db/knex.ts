@@ -6,15 +6,15 @@ import IConfig from '../../common/config';
 export default class DB {
   private connection: Knex;
 
-  constructor(private config: IConfig) {
-    this.connection = Knex(this.config.get('infra.knex'));
+  constructor(private knexClient: any, private config: IConfig) {
+    this.connection = this.knexClient(this.config.get('infra.knex'));
   }
 
   getConnection(): Knex {
     return this.connection;
   }
 
-  startTransaction(): Promise<Knex.Transaction> {
+  async startTransaction(): Promise<Knex.Transaction> {
     return new Promise((resolve, reject) =>
       this.connection.transaction(trx => resolve(trx)).catch(reject)
     );

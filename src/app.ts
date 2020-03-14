@@ -3,6 +3,8 @@ import helmet from 'fastify-helmet';
 import cors from 'fastify-cors';
 import config from 'config';
 import { Server, IncomingMessage, ServerResponse } from 'http';
+import MailgunClient from 'mailgun-js';
+import Knex from 'knex';
 
 import UserHandler from './handler/user';
 import { ErrorHandler } from './handler/error';
@@ -37,8 +39,8 @@ app.register(cors, {
 });
 
 // Instantiates controllers, services, etc
-const knexConn = new DB(appConfig).getConnection();
-const mailgun = new Mailgun(appConfig).getConnection();
+const knexConn = new DB(Knex, appConfig).getConnection();
+const mailgun = new Mailgun(MailgunClient, appConfig).getConnection();
 
 const emailService = new EmailService(mailgun, appConfig);
 const authService = new AuthService(appConfig);

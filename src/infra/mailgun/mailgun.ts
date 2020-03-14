@@ -5,8 +5,8 @@ import IConfig from '../../common/config';
 export default class Mailgun {
   private connection: MailgunClient.Mailgun;
 
-  constructor(private config: IConfig) {
-    this.connection = MailgunClient(this.config.get('infra.mailgun'));
+  constructor(private mailgunClient: any, private config: IConfig) {
+    this.connection = this.mailgunClient(this.config.get('infra.mailgun'));
   }
 
   getConnection(): MailgunClient.Mailgun {

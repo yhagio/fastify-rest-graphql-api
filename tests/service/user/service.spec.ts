@@ -7,7 +7,7 @@ import UserService from '../../../src/service/user/service';
 chai.use(chaiAsPromised);
 const expect = chai.expect;
 
-describe('Service', () => {
+describe('UserService', () => {
   const sandbox = sinon.createSandbox();
   const validator: any = {
     create: sandbox.stub(),

@@ -20,22 +20,37 @@ export default class AuthHandler {
   async signUp(req: FastifyRequest, res: FastifyReply<ServerResponse>): Promise<void> {
     const newUser = await this.userService.create(req.body);
     const token = await this.authService.issueToken(newUser);
-    res.code(200).send({ user: newUser, token });
+    res.code(200).send({
+      data: {
+        user: newUser,
+        token
+      }
+    });
     await this.emailService.sendWelcome(newUser.email, newUser.first_name);
   }
 
   async login(req: FastifyRequest, res: FastifyReply<ServerResponse>): Promise<void> {
     const user = await this.userService.getByEmailWithPassword(req.body.email);
-    if (!user || !this.authService.checkPassword(req.body.password, user.password)) {
+    if (
+      !user ||
+      !(await this.authService.checkPassword(req.body.password, user.password))
+    ) {
       throw new InvalidError('Invalid email or password');
     }
     const token = await this.authService.issueToken(user);
     const { password: _, ...rest } = user;
-    res.code(200).send({ token, user: { ...rest } });
+    res.code(200).send({
+      data: {
+        token,
+        user: { ...rest }
+      }
+    });
   }
 
   async logout(req: FastifyRequest, res: FastifyReply<ServerResponse>): Promise<void> {
-    res.code(200).send({ message: 'logged out' });
+    res.code(200).send({
+      data: { message: 'logged out' }
+    });
   }
 
   async forgotPassword(
@@ -49,7 +64,9 @@ export default class AuthHandler {
     }
     const token = generateRandomBytes();
     await this.resetPassService.create({ user_id: user.id, token });
-    res.code(200).send({ message: 'Email is sent' });
+    res.code(200).send({
+      data: { message: 'Email is sent' }
+    });
     await this.emailService.sendResetPassword(user.email, token);
   }
 
@@ -59,14 +76,16 @@ export default class AuthHandler {
   ): Promise<void> {
     const { token, password }: { token: string; password: string } = req.body;
     await this.resetPassService.completeResetPassword(token, password);
-    res.code(200).send({ message: 'Done' });
+    res.code(200).send({
+      data: { message: 'Done' }
+    });
   }
 
-  async requiresLogIn(
+  requiresLogIn(
     req: FastifyRequest,
     res: FastifyReply<ServerResponse>,
     next: (err?: Error | undefined) => void
-  ): Promise<void> {
+  ): void {
     if ((req as any).user_id) {
       next();
     } else {

@@ -61,7 +61,7 @@ const userHandler = new UserHandler(userService);
 
 // Setup routes and assign handlers
 app.get('/health', (req, res) => {
-  res.send({ ok: true });
+  res.send({ data: { ok: true } });
 });
 
 app.post('/api/auth/signup', {}, authHandler.signUp.bind(authHandler));

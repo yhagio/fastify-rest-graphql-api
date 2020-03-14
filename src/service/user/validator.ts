@@ -14,7 +14,7 @@ import { IUserDataAccess } from '../../dataAccess/user/interface';
 export default class UserValidator implements IUserService {
   constructor(private dataAccess: IUserDataAccess) {}
 
-  create(user: IUserSignUp): Promise<IUserAccount> {
+  async create(user: IUserSignUp): Promise<IUserAccount> {
     if (!user || !Object.keys(user).length) {
       throw new InvalidError('user is required');
     } else if (!user.first_name) {
@@ -31,7 +31,7 @@ export default class UserValidator implements IUserService {
     return this.dataAccess.create(user);
   }
 
-  update(id: IUser['id'], update: Partial<IUser>): Promise<void> {
+  async update(id: IUser['id'], update: Partial<IUser>): Promise<void> {
     if (!id) {
       throw new InvalidError('id is required');
     }
@@ -50,21 +50,24 @@ export default class UserValidator implements IUserService {
     return this.dataAccess.update(id, update);
   }
 
-  getByEmailWithPassword(email: IUser['email']): Promise<IUserWithPassword> {
+  async getByEmailWithPassword(email: IUser['email']): Promise<IUserWithPassword> {
     if (!email) {
       throw new InvalidError('email is required');
     }
     return this.dataAccess.getByEmailWithPassword(email);
   }
 
-  getOneById(id: IUser['id']): Promise<IUserAccount> {
+  async getOneById(id: IUser['id']): Promise<IUserAccount> {
     if (!id) {
       throw new InvalidError('id is required');
     }
     return this.dataAccess.getOneById(id);
   }
 
-  getOneByIdTrx(trx: Knex.Transaction, id: IUser['id']): Promise<IUserWithCustomerToken> {
+  async getOneByIdTrx(
+    trx: Knex.Transaction,
+    id: IUser['id']
+  ): Promise<IUserWithCustomerToken> {
     if (!id) {
       throw new InvalidError('id is required');
     }
@@ -74,7 +77,7 @@ export default class UserValidator implements IUserService {
     return this.dataAccess.getOneByIdTrx(trx, id);
   }
 
-  updateTrx(
+  async updateTrx(
     trx: Knex.Transaction,
     id: IUser['id'],
     update: Partial<IUser>

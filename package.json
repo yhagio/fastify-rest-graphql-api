@@ -14,7 +14,7 @@
     "------Linting and Testing-----": "",
     "format": "prettier --write \"{src,tests}/**/*.ts\"",
     "tslint-test": "tslint -c tslint.test.json -p tsconfig.test.json",
-    "test": "npm run format && npm run tslint-test && nyc mocha",
+    "test": "npm run format && npm run tslint-test && TS_NODE_CACHE=false nyc mocha",
     "------MIGRATION-------": "",
     "migrate": "node ./scripts/migrate.js",
     "rollback": "node ./scripts/rollback.js",

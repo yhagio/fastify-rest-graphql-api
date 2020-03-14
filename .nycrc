@@ -12,7 +12,8 @@
   "exclude": [
     "src/**/*.d.ts",
     "src/index.ts",
-    "src/app.ts"
+    "src/app.ts",
+    "src/dataAccess/**"
   ],
   "extension": [
     ".ts",

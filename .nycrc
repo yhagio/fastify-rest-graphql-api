@@ -13,7 +13,8 @@
     "src/**/*.d.ts",
     "src/index.ts",
     "src/app.ts",
-    "src/dataAccess/**"
+    "src/dataAccess/**",
+    "src/infra/graphql/**"
   ],
   "extension": [
     ".ts",

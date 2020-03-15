@@ -3,6 +3,7 @@
     "app_port": "3001",
     "client_base_url": "http://localhost:3000",
     "env": "development",
+    "logLevel": "info",
     "errorStatus": {
         "OperationError": 503,
         "InternalError": 500,
@@ -32,7 +33,6 @@
         },
         "mailgun": {
             "apiKey": "",
-            "publicApiKey": "",
             "domain": ""
         }
     }

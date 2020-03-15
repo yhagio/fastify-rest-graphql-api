@@ -3,6 +3,7 @@
     "app_port": "APP_PORT",
     "client_base_url": "CLIENT_BASE_URL",
     "env": "ENV",
+    "logLevel": "LOG_LEVEL",
     "infra": {
         "knex": {
             "client": "APP_DB_TYPE",
@@ -24,7 +25,6 @@
         },
         "mailgun": {
             "apiKey": "MAILGUN_API_KEY",
-            "publicApiKey": "MAILGUN_PUBLIC_KEY",
             "domain": "MAILGUN_DOMAIN"
         }
     }

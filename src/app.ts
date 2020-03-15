@@ -5,6 +5,7 @@ import config from 'config';
 import { Server, IncomingMessage, ServerResponse } from 'http';
 import MailgunClient from 'mailgun-js';
 import Knex from 'knex';
+import { ApolloServer } from 'apollo-server-fastify';
 
 import UserHandler from './handler/user';
 import { ErrorHandler } from './handler/error';
@@ -21,12 +22,15 @@ import ResetPasswordDataAccess from './dataAccess/resetPassword/db';
 import ResetPasswordService from './service/resetPassword/service';
 import AuthHandler from './handler/auth';
 import { SetUserToRequest } from './middlewares/auth';
-
-const app: FastifyInstance<Server, IncomingMessage, ServerResponse> = Fastify({
-  logger: true
-});
+import { typeDefs, resolvers } from './infra/graphql/schema-creator';
 
 const appConfig: IConfig = config;
+
+const app: FastifyInstance<Server, IncomingMessage, ServerResponse> = Fastify({
+  logger: {
+    level: appConfig.get('logLevel')
+  }
+});
 
 // Setup middlewares
 app.register(helmet);
@@ -59,7 +63,32 @@ const authHandler = new AuthHandler(
 );
 const userHandler = new UserHandler(userService);
 
-// Setup routes and assign handlers
+// ===== GraphQL Server (Apollo Server) setup =====
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  context: async ({ req }: { req: any }) => {
+    let user_id = '';
+
+    let authToken: string = req.headers?.authorization;
+    if (authToken?.indexOf('Bearer') >= 0) {
+      authToken = authToken.replace('Bearer ', '');
+      // TODO: What if verifyToken throws error?
+      const { id } = await authService.verifyToken(authToken);
+      user_id = id;
+    }
+    return { user_id };
+  },
+  dataSources: (): any => ({
+    authService,
+    userService,
+    emailService,
+    resetPasswordService
+  })
+});
+app.register(server.createHandler());
+
+// ===== Setup routes and assign handlers =====
 app.get('/health', (req, res) => {
   res.send({ data: { ok: true } });
 });
@@ -70,7 +99,7 @@ app.post('/api/auth/logout', {}, authHandler.logout.bind(authHandler));
 app.post('/api/auth/forgot_password', {}, authHandler.forgotPassword.bind(authHandler));
 app.post('/api/auth/update_password', {}, authHandler.updatePassword.bind(authHandler));
 
-// On every request
+// ===== On every request =====
 app.addHook('onRequest', async (req, res) => SetUserToRequest(req, res, authService));
 
 app.get(

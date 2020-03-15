@@ -65,7 +65,7 @@ export default class AuthHandler {
     const token = generateRandomBytes();
     await this.resetPassService.create({ user_id: user.id, token });
     res.code(200).send({
-      data: { message: 'Email is sent' }
+      data: { message: 'Email has been sent' }
     });
     await this.emailService.sendResetPassword(user.email, token);
   }
@@ -77,7 +77,7 @@ export default class AuthHandler {
     const { token, password }: { token: string; password: string } = req.body;
     await this.resetPassService.completeResetPassword(token, password);
     res.code(200).send({
-      data: { message: 'Done' }
+      data: { message: 'Password has been updated' }
     });
   }
 

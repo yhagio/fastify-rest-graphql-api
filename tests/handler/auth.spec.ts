@@ -140,7 +140,7 @@ describe('AuthHandler', () => {
 
       expect(send).to.have.been.calledWith({
         data: {
-          message: 'Email is sent'
+          message: 'Email has been sent'
         }
       });
       expect(resetPassService.create.getCall(0).args[0].user_id).to.be.equal(user.id);
@@ -172,7 +172,7 @@ describe('AuthHandler', () => {
 
       expect(send).to.have.been.calledWith({
         data: {
-          message: 'Done'
+          message: 'Password has been updated'
         }
       });
     });

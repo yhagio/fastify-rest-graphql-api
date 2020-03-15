@@ -34,6 +34,9 @@ Built with 💖
 - [x] GraphQL API
 - [x] GraphQL playground
 - [ ] Swagger REST API documentation
+- [ ] More unit tests (dataAccess, graphql)
+- [ ] Diagram, detailed documentaion of each section
+- [ ] Refactor
 - [ ] ? Auto migration (optional via env var)
 
 

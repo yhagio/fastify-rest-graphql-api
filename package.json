@@ -2,10 +2,7 @@
   "name": "fastify-rest-graphql-api",
   "version": "1.0.0",
   "description": "Fastify Typescript REST / GraphQL Postgres API Boilerplate",
-  "main": "index.js",
-  "directories": {
-    "test": "test"
-  },
+  "main": "dist/index.js",
   "scripts": {
     "------DEV-----": "",
     "dev": "ENV=development nodemon",
@@ -23,9 +20,17 @@
     "------PROD------": "",
     "start": "npm run build && ENV=production node dist/index.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "fastify",
+    "node.js",
+    "graphql",
+    "knex",
+    "typescript",
+    "rest",
+    "api"
+  ],
+  "author": "Yuichi Hagio",
+  "license": "MIT",
   "dependencies": {
     "apollo-server-fastify": "^2.11.0",
     "bcryptjs": "^2.4.3",

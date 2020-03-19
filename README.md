@@ -34,9 +34,10 @@ Built with 💖
 - [x] GraphQL API
 - [x] GraphQL playground
 - [ ] Swagger REST API documentation
-- [ ] More unit tests (dataAccess, graphql)
+- [ ] More unit tests (dataAccess)
 - [ ] Diagram, detailed documentaion of each section
 - [ ] Refactor
+- [ ] Heroku deploy for demo?
 - [ ] ? Auto migration (optional via env var)
 
 

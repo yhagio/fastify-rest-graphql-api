@@ -14,7 +14,9 @@
     "src/index.ts",
     "src/app.ts",
     "src/dataAccess/**",
-    "src/infra/graphql/**"
+    "src/infra/graphql/interface.ts",
+    "src/infra/graphql/schema-creator.ts",
+    "src/infra/graphql/**/typedef.ts"
   ],
   "extension": [
     ".ts",

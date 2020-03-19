@@ -1,9 +1,10 @@
+import { ServerResponse } from 'http';
+import { FastifyRequest, FastifyReply } from 'fastify';
+
 import { IUserService } from '../service/user/interface';
 import { IEmailService } from '../service/email/interface';
 import { IAuthService } from '../service/auth/interface';
 import { IResetPasswordService } from '../service/resetPassword/interface';
-import { FastifyRequest, FastifyReply } from 'fastify';
-import { ServerResponse } from 'http';
 import { generateRandomBytes } from '../common/token';
 import { NotFoundError } from '../common/error/notFound';
 import { UnauthorizedError } from '../common/error/unauthorized';

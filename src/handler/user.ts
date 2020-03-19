@@ -1,5 +1,6 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
 import { ServerResponse } from 'http';
+
 import { UnauthorizedError } from '../common/error/unauthorized';
 import { IUserService } from '../service/user/interface';
 

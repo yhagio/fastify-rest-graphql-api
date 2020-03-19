@@ -1,6 +1,6 @@
 {
   "name": "fastify-rest-graphql-api",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Fastify Typescript REST / GraphQL Postgres API Boilerplate",
   "main": "dist/index.js",
   "scripts": {

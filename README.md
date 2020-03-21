@@ -34,12 +34,15 @@ Built with 💖
 - [x] GraphQL API
 - [x] GraphQL playground
 - [x] Swagger REST API documentation
-- [ ] Diagram, detailed documentaion of each section
-- [ ] Refactor
+- [x] Diagram
 - [ ] Heroku deploy for demo?
 - [ ] ? Auto migration (optional via env var)
 
 ---
+
+component diagram
+
+![diagram](./diagram-components.png)
 
 swagger
 

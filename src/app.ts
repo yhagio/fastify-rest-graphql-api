@@ -7,21 +7,21 @@ import MailgunClient from 'mailgun-js';
 import Knex from 'knex';
 import { ApolloServer } from 'apollo-server-fastify';
 
+import { SetUserToRequest } from './middlewares/auth';
 import UserHandler from './handler/user';
 import { ErrorHandler } from './handler/error';
+import AuthHandler from './handler/auth';
 import IConfig from './common/config';
-import DB from './infra/db/knex';
-import Mailgun from './infra/mailgun/mailgun';
 import EmailService from './service/email/service';
 import AuthService from './service/auth/service';
 import UserService from './service/user/service';
 import UserValidator from './service/user/validator';
-import UserDataAccess from './dataAccess/user/db';
 import ResetPasswordValidator from './service/resetPassword/validator';
-import ResetPasswordDataAccess from './dataAccess/resetPassword/db';
 import ResetPasswordService from './service/resetPassword/service';
-import AuthHandler from './handler/auth';
-import { SetUserToRequest } from './middlewares/auth';
+import ResetPasswordDataAccess from './dataAccess/resetPassword/db';
+import UserDataAccess from './dataAccess/user/db';
+import DB from './infra/db/knex';
+import Mailgun from './infra/mailgun/mailgun';
 import { typeDefs, resolvers } from './infra/graphql/schema-creator';
 
 const appConfig: IConfig = config;

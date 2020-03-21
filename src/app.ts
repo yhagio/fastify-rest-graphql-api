@@ -32,6 +32,15 @@ const app: FastifyInstance<Server, IncomingMessage, ServerResponse> = Fastify({
   }
 });
 
+app.register(require('fastify-swagger'), {
+  routePrefix: '/docs',
+  exposeRoute: true,
+  mode: 'static',
+  specification: {
+    path: './src/swagger.yaml'
+  }
+});
+
 // Setup middlewares
 app.register(helmet);
 app.register(cors, {
@@ -89,7 +98,7 @@ const server = new ApolloServer({
 app.register(server.createHandler());
 
 // ===== Setup routes and assign handlers =====
-app.get('/health', (req, res) => {
+app.get('/health', {}, (req, res) => {
   res.send({ data: { ok: true } });
 });
 

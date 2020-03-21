@@ -1,0 +1,387 @@
+openapi: "3.0.0"
+info:
+  version: 0.1.0
+  title: Fastify REST GraphQL API Boilerplate
+  description: REST API exposed in the OpenAPI 3.0 specification
+  termsOfService: http://swagger.io/terms/
+  contact:
+    name: Swagger API Team
+    email: apiteam@swagger.io
+    url: http://swagger.io
+  license:
+    name: MIT
+    url: https://github.com/yhagio/fastify-rest-graphql-api/blob/master/LICENSE
+servers:
+  - url: http://localhost:3000
+paths:
+  /health:
+    get:
+      description: Get Health status of the application
+      operationId: getHealth
+      responses:
+        '200':
+          description: health status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Health'
+        '500':
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/auth/signup:
+    post:
+      description: Singup
+      operationId: signup
+      requestBody:
+        description: User Account info
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserSignupBody'
+      responses:
+        '200':
+          description: User Account info + JWT Token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    required:
+                      - user
+                      - token
+                    properties:
+                      user:
+                        $ref: '#/components/schemas/UserAccount'
+                      token:
+                        $ref: '#/components/schemas/Token'
+
+        '500':
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/auth/login:
+    post:
+      description: Login
+      operationId: login
+      requestBody:
+        description: Email and Password
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserLoginBody'
+      responses:
+        '200':
+          description: User Account info + JWT Token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    required:
+                      - user
+                      - token
+                    properties:
+                      user:
+                        $ref: '#/components/schemas/UserAccount'
+                      token:
+                        $ref: '#/components/schemas/Token'
+
+        '500':
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/auth/logout:
+    post:
+      description: Logout
+      operationId: logout
+      responses:
+        '200':
+          description: Logged out success message
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    required:
+                      - message
+                    properties:
+                      message:
+                        type: string
+                        example: "logged out"
+
+        '500':
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/auth/forgot_password:
+    post:
+      description: Forgot Password, we send a token for the user to update password
+      operationId: forgotPassword
+      requestBody:
+        description: User's registered email
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+      responses:
+        '200':
+          description: Operation success message
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    required:
+                      - message
+                    properties:
+                      message:
+                        type: string
+                        example: "Email has been sent"
+
+        '500':
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/auth/update_password:
+    post:
+      description: Update user's password, required to provide token sent to user's email
+      operationId: updatePassword
+      requestBody:
+        description: Token and Password
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePasswordBody'
+      responses:
+        '200':
+          description: Operation success message
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    required:
+                      - message
+                    properties:
+                      message:
+                        type: string
+                        example: "Password has been updated"
+
+        '500':
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/account:
+    get:
+      description: Get currently loggedin user account
+      operationId: getAccount
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: User Account
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    required:
+                      - user
+                    properties:
+                      user:
+                        $ref: '#/components/schemas/UserAccount'
+        '500':
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      description: Update User Account info
+      operationId: putAccount
+      security:
+        - BearerAuth: []
+      requestBody:
+        description: User Account info to be updated
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserAccountUpdateBody'
+      responses:
+        '200':
+          description: User ID
+          content:
+            application/json:
+              schema:
+                data:
+                  type: object
+                  required:
+                    - user_id
+                  properties:
+                    user_id:
+                      type: string
+                      format: uuid
+
+        '500':
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    Health:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: object
+          required:
+            - ok
+          properties:
+            ok:
+              type: boolean
+
+    Token:
+      type: string
+
+    UserAccount:
+      type: object
+      required:
+        - id
+        - email
+        - first_name
+        - last_name
+        - admin
+      properties:
+        id:
+          type: string
+          format: uuid
+        email:
+          type: string
+          format: email
+        first_name:
+          type: string
+        last_name:
+          type: string
+        admin:
+          type: boolean
+
+    UserAccountUpdateBody:
+      type: object
+      required:
+        - email
+        - first_name
+        - last_name
+      properties:
+        email:
+          type: string
+          format: email
+        first_name:
+          type: string
+        last_name:
+          type: string
+
+    UserSignupBody:
+      type: object
+      required:
+        - email
+        - first_name
+        - last_name
+        - password
+      properties:
+        email:
+          type: string
+          format: email
+        first_name:
+          type: string
+        last_name:
+          type: string
+        password:
+          type: string
+
+    UserLoginBody:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+
+    UpdatePasswordBody:
+      type: object
+      required:
+        - token
+        - password
+      properties:
+        token:
+          type: string
+        password:
+          type: string
+
+    Error:
+      type: object
+      required:
+        - error
+      properties:
+        error:
+          type: object
+          properties:
+            statusCode:
+              type: integer
+              format: int64
+            name:
+              type: string
+            message:
+              type: string

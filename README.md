@@ -33,13 +33,21 @@ Built with 💖
 - [x] MIT LICENSE
 - [x] GraphQL API
 - [x] GraphQL playground
-- [ ] Swagger REST API documentation
-- [ ] More unit tests (dataAccess)
+- [x] Swagger REST API documentation
 - [ ] Diagram, detailed documentaion of each section
 - [ ] Refactor
 - [ ] Heroku deploy for demo?
 - [ ] ? Auto migration (optional via env var)
 
+---
+
+swagger
+
+![swagger](./swagger-local.png)
+
+graphql playground
+
+![swagger](./graphql-local.png)
 
 ---
 
@@ -86,5 +94,7 @@ yarn build             # Build application
 ```
 
 You can see graphql playground at `http:/localhost:3000/graphql` once application is up and running.
+
+You can see swagger REST API docs at `http:/localhost:3000/docs` once application is up and running.
 
 See more commands in `./package.json`

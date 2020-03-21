@@ -1,9 +1,9 @@
 version: '3.7'
 
 services:
-  db:
+  localdb:
     image: postgres:11.2
-    container_name: db
+    container_name: localdb
     volumes:
       - ./sql/init.sql:/docker-entrypoint-initdb.d/init.sql
       - mydb_data:/var/lib/postgresql/data

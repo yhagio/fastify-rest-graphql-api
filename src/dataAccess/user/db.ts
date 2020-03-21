@@ -19,7 +19,7 @@ export default class UserDataAccess implements IUserDataAccess {
     const [created] = await this.knex
       .insert(user)
       .into('users')
-      .returning(['id', 'first_name', 'last_name', 'email']);
+      .returning(['id', 'first_name', 'last_name', 'email', 'admin']);
     return created;
   }
 

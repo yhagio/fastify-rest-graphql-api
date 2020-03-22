@@ -5,6 +5,9 @@
 
 # Fastify REST GraphQL API Boilerplate
 
+- DEMO (GraphQL Playground): https://fastify-rest-graphql-api.herokuapp.com/graphql
+- DEMO (Swagger REST docs): https://fastify-rest-graphql-api.herokuapp.com/docs/static/index.html
+
 Built with 💖
 
 - [Node.js](https://nodejs.org/en/)

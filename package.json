@@ -2,6 +2,10 @@
   "name": "fastify-rest-graphql-api",
   "version": "0.1.0",
   "description": "Fastify Typescript REST / GraphQL Postgres API Boilerplate",
+  "engines": {
+    "node": "12.16.0",
+    "npm": "6.13.4"
+  },
   "main": "dist/index.js",
   "scripts": {
     "------DEV-----": "",
@@ -18,7 +22,7 @@
     "seed": "node ./scripts/seed.js",
     "resetdb": "node ./scripts/reset_db.js",
     "------PROD------": "",
-    "start": "npm run build && ENV=production node dist/index.js"
+    "start": "npm run build && ENV=production node -r dotenv/config dist/index.js"
   },
   "keywords": [
     "fastify",

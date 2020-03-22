@@ -93,7 +93,8 @@ const server = new ApolloServer({
     userService,
     emailService,
     resetPasswordService
-  })
+  }),
+  playground: true
 });
 app.register(server.createHandler());
 

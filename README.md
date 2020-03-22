@@ -40,7 +40,6 @@ Built with 💖
 - [x] GraphQL playground
 - [x] Swagger REST API documentation
 - [x] Diagram
-- [ ] Heroku deploy for demo?
 - [ ] ? Auto migration (optional via env var)
 
 ---

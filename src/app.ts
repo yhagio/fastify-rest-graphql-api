@@ -23,6 +23,7 @@ import UserDataAccess from './dataAccess/user/db';
 import DB from './infra/db/knex';
 import Mailgun from './infra/mailgun/mailgun';
 import { typeDefs, resolvers } from './infra/graphql/schema-creator';
+import { AddressInfo } from 'net';
 
 const appConfig: IConfig = config;
 
@@ -42,9 +43,11 @@ app.register(require('fastify-swagger'), {
 });
 
 // Setup middlewares
+const appServer = app.server.address() as AddressInfo;
+
 app.register(helmet);
 app.register(cors, {
-  origin: appConfig.get<string>('client_base_url'),
+  origin: appServer.address,
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   preflightContinue: false,
   optionsSuccessStatus: 204,

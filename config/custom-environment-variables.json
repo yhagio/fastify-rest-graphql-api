@@ -1,8 +1,8 @@
 {
     "app_host": "APP_HOST",
-    "app_port": "APP_PORT",
+    "app_port": "PORT",
     "client_base_url": "CLIENT_BASE_URL",
-    "env": "ENV",
+    "env": "NODE_ENV",
     "logLevel": "LOG_LEVEL",
     "infra": {
         "knex": {

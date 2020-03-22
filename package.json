@@ -18,7 +18,7 @@
     "seed": "node ./scripts/seed.js",
     "resetdb": "node ./scripts/reset_db.js",
     "------PROD------": "",
-    "start": "npm run build && ENV=production node dist/index.js"
+    "start": "npm run build && ENV=production node -r dotenv/config dist/index.js"
   },
   "keywords": [
     "fastify",

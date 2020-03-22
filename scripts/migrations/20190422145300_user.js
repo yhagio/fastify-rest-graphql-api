@@ -1,7 +1,6 @@
 exports.up = async (knex) => {
   await knex.raw(`
     CREATE EXTENSION IF NOT EXISTS pgcrypto;
-    DROP TABLE IF EXISTS users;
     CREATE TABLE users (
         id             uuid DEFAULT gen_random_uuid (),
         first_name     VARCHAR NOT NULL,

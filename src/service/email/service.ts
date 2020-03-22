@@ -3,7 +3,7 @@ import { IEmailService } from './interface';
 import IConfig from '../../common/config';
 
 export default class EmailService implements IEmailService {
-  constructor(private readonly emailClient: Mailgun, private readonly config: IConfig) {}
+  constructor(private readonly emailClient: Mailgun, private readonly config: IConfig) { }
 
   async sendWelcome(recipientEmail: string, recipientName: string): Promise<void> {
     const data: messages.SendData = {
@@ -28,6 +28,9 @@ export default class EmailService implements IEmailService {
         MyApp Team
       `
     };
+    if (process.env.NODE_ENV === 'demo') {
+      return;
+    }
     await this.emailClient.messages().send(data);
   }
 
@@ -71,6 +74,9 @@ export default class EmailService implements IEmailService {
         MyApp Team<br/>
       `
     };
+    if (process.env.NODE_ENV === 'demo') {
+      return;
+    }
     await this.emailClient.messages().send(data);
   }
 

@@ -94,6 +94,8 @@ const server = new ApolloServer({
     emailService,
     resetPasswordService
   }),
+  // DISABLE BELOW in real production
+  introspection: true,
   playground: true
 });
 app.register(server.createHandler());

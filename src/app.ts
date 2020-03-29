@@ -48,7 +48,7 @@ app.register(cors, {
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
   preflightContinue: true,
   optionsSuccessStatus: 204,
-  credentials: false
+  credentials: true
 });
 
 // Instantiates controllers, services, etc

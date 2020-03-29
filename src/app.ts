@@ -46,7 +46,7 @@ app.register(helmet);
 app.register(cors, {
   origin: [appConfig.get<string>('client_base_url'), 'http://localhost:3000'],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
-  preflightContinue: false,
+  preflightContinue: true,
   optionsSuccessStatus: 204,
   credentials: false
 });

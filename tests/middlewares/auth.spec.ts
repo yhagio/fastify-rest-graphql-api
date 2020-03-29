@@ -26,10 +26,16 @@ describe('AuthMiddleware', () => {
   });
 
   describe('SetUserToRequest', () => {
-    it('set req.user_id if auth token is passed in headers', async () => {
+    it('set req.user_id if auth token is passed in headers, with Bearer', async () => {
       req.headers.authorization = token;
       await SetUserToRequest(req, res, authService);
       expect(req.user_id).to.be.equal(userId);
+    });
+
+    it('set req.user_id if auth token is passed in headers', async () => {
+      req.headers.authorization = 'token';
+      await SetUserToRequest(req, res, authService);
+      return expect(req.user_id).to.be.equal(userId);
     });
 
     it('set no req.user_id if no headers', async () => {

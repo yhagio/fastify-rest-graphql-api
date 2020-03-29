@@ -8,11 +8,15 @@ export const SetUserToRequest = async (
   authService: IAuthService
 ) => {
   let authToken: string = req.headers?.authorization;
-  if (authToken?.indexOf('Bearer') >= 0) {
-    authToken = authToken.replace('Bearer ', '');
+  if (authToken) {
+    if (authToken.indexOf('Bearer') >= 0) {
+      authToken = authToken.replace('Bearer ', '');
+    }
     // TODO: What if verifyToken throws error?
-    const { id } = await authService.verifyToken(authToken);
-    (req as any).user_id = id;
+    try {
+      const { id } = await authService.verifyToken(authToken);
+      (req as any).user_id = id;
+    } catch {}
   }
   return;
 };

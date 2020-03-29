@@ -8,6 +8,8 @@
 - DEMO (GraphQL Playground): https://fastify-rest-graphql-api.herokuapp.com/graphql
 - DEMO (Swagger REST docs): https://fastify-rest-graphql-api.herokuapp.com/docs/static/index.html
 
+Note: in demo, I disabled email
+
 Built with 💖
 
 - [Node.js](https://nodejs.org/en/)
@@ -38,7 +40,6 @@ Built with 💖
 - [x] GraphQL playground
 - [x] Swagger REST API documentation
 - [x] Diagram
-- [ ] Heroku deploy for demo?
 - [ ] ? Auto migration (optional via env var)
 
 ---

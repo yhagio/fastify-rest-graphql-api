@@ -44,11 +44,11 @@ app.register(require('fastify-swagger'), {
 // Setup middlewares
 app.register(helmet);
 app.register(cors, {
-  origin: appConfig.get<string>('client_base_url'),
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  origin: [appConfig.get<string>('client_base_url'), 'http://localhost:3000'],
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
   preflightContinue: false,
   optionsSuccessStatus: 204,
-  credentials: true
+  credentials: false
 });
 
 // Instantiates controllers, services, etc

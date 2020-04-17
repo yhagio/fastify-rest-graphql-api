@@ -28,10 +28,7 @@ export default class UserDataAccess implements IUserDataAccess {
     if (typeof rest.password !== 'undefined') {
       rest.password = await hashString(rest.password);
     }
-    await this.knex
-      .from('users')
-      .update(rest)
-      .where({ id: user_id });
+    await this.knex.from('users').update(rest).where({ id: user_id });
   }
 
   async getByEmailWithPassword(email: IUser['email']): Promise<IUserWithPassword> {
@@ -66,16 +63,11 @@ export default class UserDataAccess implements IUserDataAccess {
     id: IUser['id'],
     update: Partial<IUser>
   ): Promise<void> {
-    await trx
-      .from('users')
-      .update(update)
-      .where({ id });
+    await trx.from('users').update(update).where({ id });
   }
 
   async delete(id: IUser['id']): Promise<IUserAccount['id']> {
-    await this.knex('users')
-      .where({ id })
-      .del();
+    await this.knex('users').where({ id }).del();
     return id;
   }
 }

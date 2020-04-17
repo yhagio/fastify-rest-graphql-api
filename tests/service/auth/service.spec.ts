@@ -57,12 +57,8 @@ describe('AuthService', () => {
       expect(token).to.have.property('id', userAccount.id);
       expect(token).to.have.property('first_name', userAccount.first_name);
       expect(token).to.have.property('email', userAccount.email);
-      expect(token)
-        .to.have.property('iat')
-        .that.is.a('number');
-      expect(token)
-        .to.have.property('exp')
-        .that.is.a('number');
+      expect(token).to.have.property('iat').that.is.a('number');
+      expect(token).to.have.property('exp').that.is.a('number');
     });
   });
 });
